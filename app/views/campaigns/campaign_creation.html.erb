@@ -1,0 +1,12 @@
+<h1> Campaign creation form </h1>
+<legend>Campaign</legend>
+<center>
+<%= form_for :campaign do |f| %>
+	Title: <%= f.text_field :title %><br>
+	Type: <%= f.text_field :type %><br>
+	<!--Bitcoin: <%= f.radio_button :preferred_currency, 'Bitcoin', :checked => true %><br>
+	Dogecoin: <%= f.radio_button :preferred_currency, 'Dogecoin'%><br> -->
+	Dropdown: <%= f.select :preferred_currency, ["Dogecoin", "Bitcoin"] %><br>
+	<%= f.submit %>
+<% end %>
+</center>

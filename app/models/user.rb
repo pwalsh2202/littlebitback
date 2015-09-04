@@ -10,4 +10,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.koala(auth)
+  	token = auth[:token]
+  	facebook = Koala::Facebook::API.new(token)
+  	facebook.get_object("me?fields=picture")
+  end
+
 end
