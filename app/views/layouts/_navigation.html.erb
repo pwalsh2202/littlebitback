@@ -8,6 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      <%= current_user.name if current_user%>
       <%= link_to 'Home', root_path, class: 'navbar-brand' %>
     </div>
     <div class="collapse navbar-collapse">

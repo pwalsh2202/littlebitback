@@ -8,7 +8,6 @@ class CreateCampaigns < ActiveRecord::Migration
       t.string :ownership
       t.string :category
       t.string :comments
-      t.string :verification_link
       t.string :preferred_currency
       t.string :location
       t.string :website
@@ -16,6 +15,7 @@ class CreateCampaigns < ActiveRecord::Migration
       t.text :tags
       t.integer :votes
       t.integer :views
+      t.string :qr_code
 
       t.timestamps null: false
     end

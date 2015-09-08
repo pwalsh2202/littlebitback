@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # user routes
+  get '/u/:id' => 'users#show'
   resources :users
   root to: 'visitors#index'
 
@@ -10,7 +12,8 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
 
   # campaign routes
-  get '/campaign/create' => 'campaigns#campaign_creation'
-  post '/campaign/create' => 'campaigns#creation_callback'
-
+  get '/c/create' => 'campaigns#campaign_creation'
+  post '/c/create' => 'campaigns#show'
+  get '/c/:title' => 'campaigns#show'
+  resources :campaigns
 end

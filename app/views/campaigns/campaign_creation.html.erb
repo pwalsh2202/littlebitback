@@ -7,6 +7,8 @@
 	<!--Bitcoin: <%= f.radio_button :preferred_currency, 'Bitcoin', :checked => true %><br>
 	Dogecoin: <%= f.radio_button :preferred_currency, 'Dogecoin'%><br> -->
 	Dropdown: <%= f.select :preferred_currency, ["Dogecoin", "Bitcoin"] %><br>
-	<%= f.submit %>
+
+	QR Code: <%= f.file_field :uploaded_qr_code %>
+	<%= f.submit "Save the campaign punk" %>
 <% end %>
 </center>

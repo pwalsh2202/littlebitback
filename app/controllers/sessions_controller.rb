@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     reset_session
     session[:user_id] = user.id
     session[:auth_token] = auth.access_token
-    redirect_to '/login', :notice => 'Signed in!'
+    redirect_to '/', :notice => 'Signed in!'
     #redirect_to root_url, :notice => 'Signed in!'
   end
 
