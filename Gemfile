@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-#ruby '2.2.2'
+ruby '2.2.2'
 gem 'rails', '4.2.3'
 gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
@@ -20,6 +20,8 @@ gem 'omniauth-facebook'
 gem 'therubyracer', :platform=>:ruby
 gem 'figaro'
 gem 'koala'
+gem 'rmagick'
+gem 'zxing'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

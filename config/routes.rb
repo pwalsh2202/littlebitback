@@ -1,8 +1,11 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do	
+  root to: 'visitors#index'
+
+
   # user routes
   get '/u/:id' => 'users#show'
   resources :users
-  root to: 'visitors#index'
+  
 
   # session routes
   get '/login' => 'users#login'
@@ -12,6 +15,7 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
 
   # campaign routes
+  get '/c/index' => 'campaigns#index', as: :index_campaign
   get '/c/create' => 'campaigns#campaign_creation'
   post '/c/create' => 'campaigns#show'
   get '/c/:title' => 'campaigns#show'

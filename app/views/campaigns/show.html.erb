@@ -1,4 +1,5 @@
-<h1> Form works </h1>
 
 <%= params[:title]%>
-<br>Accepts: <%= @campaign.preferred_currency %>
+
+<br><br>
+<p align="right"><legend>Donation Info </legend><br>Current Bitcoin exchange rate: <%= @current_bitcoin_price %><br>Accepts: <%= @campaign.preferred_currency %><br>Page views: <%= @campaign.views%> </p>

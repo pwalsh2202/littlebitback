@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20150902174412) do
     t.string   "ownership"
     t.string   "category"
     t.string   "comments"
-    t.string   "verification_link"
     t.string   "preferred_currency"
     t.string   "location"
     t.string   "website"
@@ -29,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150902174412) do
     t.text     "tags"
     t.integer  "votes"
     t.integer  "views"
+    t.string   "qr_code"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end

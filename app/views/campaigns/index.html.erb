@@ -1,0 +1,5 @@
+
+<legend> Campaigns </legend>
+<% @campaigns.each do |c| %>
+	<ul><%= c.title %> <%= c.qr_code %></ul>
+<% end %>

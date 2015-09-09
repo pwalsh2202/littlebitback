@@ -6,16 +6,28 @@ class CampaignsController < ApplicationController
 
 	def show
 		unless params[:title]
-			@campaign = Campaign.new(:title => params[:campaign][:title], :ownership => current_user.id.to_i, :preferred_currency => params[:campaign][:preferred_currency])
-			@campaign.save
+			@campaign = Campaign.new(:title => params[:campaign][:title], :ownership => current_user.id.to_i, :preferred_currency => params[:campaign][:preferred_currency], :views => 0)
+			
 			# saves the uploaded qr code
 			raw_upload = params[:campaign][:uploaded_qr_code]
-			File.open(Rails.root.join('public', 'uploads', raw_upload.original_filename), 'wb') do |file|
-				 file.write(raw_upload.read)
+			upload_path = Rails.root.join('public', 'uploads', raw_upload.original_filename)
+			File.open(upload_path, 'wb') do |file|
+				file.write(raw_upload.read)
 			end
-			
-			redirect_to "/c/#{@campaign}"
+
+			require 'zxing'
+			@campaign.qr_code = ZXing.decode(upload_path.to_s)
+			@campaign.save
+			redirect_to "/c/#{params[:campaign][:title]}"
 		end
-		@campaign = Campaign.find_by_title(params[:title].gsub('%20', ' '))
+		@campaign = Campaign.find_by_title(params[:title])
+		require 'open-uri'
+		@current_bitcoin_price = JSON.parse(open('https://api.coindesk.com/v1/bpi/currentprice.json').read)['bpi']['USD']['rate']
+		@campaign.views +=1
+		@campaign.save
+	end
+
+	def index
+		@campaigns = Campaign.all
 	end
 end
