@@ -1,5 +1,7 @@
 
 <legend> Campaigns </legend>
+
+<%= link_to 'Create a campaign', create_campaign_path %>
 <% @campaigns.each do |c| %>
-	<ul><%= c.title %> <%= c.qr_code %></ul>
+	<ul><%= link_to c.title,  show_campaign_path(c.title)%> <%= c.qr_code %></ul>
 <% end %>

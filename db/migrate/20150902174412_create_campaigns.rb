@@ -14,7 +14,7 @@ class CreateCampaigns < ActiveRecord::Migration
       t.float :rating
       t.text :tags
       t.integer :votes
-      t.integer :views
+      t.integer :views, default: 0
       t.string :qr_code
 
       t.timestamps null: false

@@ -1,5 +1,14 @@
-
 <%= params[:title]%>
 
 <br><br>
-<p align="right"><legend>Donation Info </legend><br>Current Bitcoin exchange rate: <%= @current_bitcoin_price %><br>Accepts: <%= @campaign.preferred_currency %><br>Page views: <%= @campaign.views%> </p>
+<div class = 'container' align = 'right'>
+			
+	<table class = 'table-striped table-bordered table-condensed table-responsive' style = "table-layout:auto;">
+		<thead><th>Donation Info </th><th>Donation Info</th></thead>
+			
+			<tr><td class = "auto">Current Bitcoin exchange rate:</td><td> <%= @current_bitcoin_price %></td></tr>
+			<tr><td>Accepts:</td><td> <%= @campaign.preferred_currency %></td></tr>
+			<tr><td>Page views:</td><td> <%= @campaign.views%></td></tr>
+			<tr><%=@campaign.qr_code%></tr>
+	</table>
+</div>

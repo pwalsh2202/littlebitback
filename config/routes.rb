@@ -16,8 +16,8 @@ Rails.application.routes.draw do
 
   # campaign routes
   get '/c/index' => 'campaigns#index', as: :index_campaign
-  get '/c/create' => 'campaigns#campaign_creation'
+  get '/c/create' => 'campaigns#campaign_creation', as: :create_campaign
   post '/c/create' => 'campaigns#show'
-  get '/c/:title' => 'campaigns#show'
+  get '/c/:title' => 'campaigns#show', as: :show_campaign
   resources :campaigns
 end
