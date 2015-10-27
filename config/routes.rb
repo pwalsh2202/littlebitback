@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   # user routes
   get '/u/:id' => 'users#show'
   resources :users
-  
+  # string -- user.email.split("@")[0]
+
 
   # session routes
   get '/login' => 'users#login'

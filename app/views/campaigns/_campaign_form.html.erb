@@ -1,0 +1,40 @@
+<h1> Campaign creation form </h1>
+<div class = "container" style = "width: 600px;box-shadow: 0 0 2px black; margin-bottom: 50px;">
+	<legend>Campaign</legend>
+
+<%= form_for :campaign, :html => { :class => "form-horizontal form-group"} do |f| %>
+	<div class = 'col-md-12 col-md-offset-2' style ='margin-top:5px; overflow: auto; display: inline-block;border:4px; align:left;'>
+					
+					Title<span style = "color:red;">*</span><br/> <%= f.text_field :title, :required => true, :placeholder => "Name of your project" %><br>
+				
+				<div class ="row top-buffer">
+					Category<br/> <%= f.select :type, ["Uncategorized", "People", "Events", "Non-profit Organizations", "Websites and Blogs", "Software", "Businesses", "Media and Content Creation", "Authors", "Singers", "Other"]%>
+				</div>
+
+				<div class = "row top-buffer">
+					Preferred Currency<br/> <%= f.select :preferred_currency, ["Bitcoin", "Dogecoin"] %>
+				</div>
+
+				<div class = "row top-buffer">
+					<span id ="pref_coin" style = "font-weight: bold;">Bitcoin</span> wallet address
+					<script>
+						document.getElementById("campaign_preferred_currency").onchange = function(){
+							document.getElementById("pref_coin").innerHTML = (this.options[this.selectedIndex].text);
+						}
+					</script>
+				</div>
+
+				<div class = 'row top-buffer'>
+					<%= f.file_field :uploaded_qr_code, :text => "Upload QR Code" %>
+				</div>
+
+				<div class = 'row top-buffer' style = "margin-bottom:10px;">
+					Description<span style = "color:red;">*</span><br/> <%= f.text_area :description, :required => true, :rows=>'5', :cols=> "40", :style => "margin-bottom: 10px; resize: none;" %><br>
+				</div>
+				<!-- javascript here to create a default description using title, category, preferred currency-->
+
+
+	<%= f.submit "Save Campaign", :class => "btn btn-lg btn-primary top-buffer", :style => 'margin-bottom: 20px;' %>
+	</div>
+<% end %>
+</div>

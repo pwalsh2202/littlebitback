@@ -5,7 +5,7 @@ class CampaignsController < ApplicationController
 	end
 
 	def show
-		unless params[:title]
+		if params[:title].nil?
 			@campaign = Campaign.new(:title => params[:campaign][:title], :ownership => current_user.id.to_i, :preferred_currency => params[:campaign][:preferred_currency], :views => "0")
 			
 			# saves the uploaded qr code
@@ -15,17 +15,20 @@ class CampaignsController < ApplicationController
 				file.write(raw_upload.read)
 				#file.rename(raw_upload.read.to_s + raw_upload.original_filename.split('.')[-1])
 			end
-
+			@description = @campaign.description
 			require 'zxing'
 			@campaign.qr_code = ZXing.decode(upload_path.to_s)
 			@campaign.save
 			redirect_to "/c/#{params[:campaign][:title]}"
+		else
+			@campaign = Campaign.find_by_title(params[:title])
+			#@campaign.views +=1
+			@campaign.description = params[:description]
+			require 'open-uri'
+			@current_bitcoin_price = "a" #JSON.parse(open('https://api.coindesk.com/v1/bpi/currentprice.json').read)['bpi']['USD']['rate']
+			  # potentially could make it unique to each session
+			@campaign.save
 		end
-		@campaign = Campaign.find_by_title(params[:title])
-		require 'open-uri'
-		@current_bitcoin_price = JSON.parse(open('https://api.coindesk.com/v1/bpi/currentprice.json').read)['bpi']['USD']['rate']
-		@campaign.views  # potentially could make it unique to each session
-		@campaign.save
 	end
 
 	def index

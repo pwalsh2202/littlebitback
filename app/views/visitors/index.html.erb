@@ -1,10 +1,9 @@
-<h3>Little Bit Back</h3>
 <style>
 	img.bg {
 	  min-width: 1024px;
 	  width: auto;
 	  height: 100%;
-	  position: fixed;
+	  position: auto;
 	  top: 0;
 	  left: 0;
 	  opacity: .7;
@@ -17,8 +16,33 @@
 	}
 </style>
 
+<!-- Carousel container -->
+<div id="my-pics" class="carousel slide" data-ride="carousel">
+
+<!-- Indicators -->
+
+<div class="carousel-inner" role="listbox">
+	<%= render "carousel" %>
+</div>
 
 
-<p align = "center" style = "position: absolute; top: 1em; font-family: Times New Roman; font-size: 34px;">Bitcoin is power in numbers</p>
+<a class="left carousel-control" href="#my-pics" role="button" data-slide="prev">
+<span class="icon-prev" aria-hidden="true"></span>
+<span class="sr-only">Previous</span>
+</a>
+<a class="right carousel-control" href="#my-pics" role="button" data-slide="next">
+<span class="icon-next" aria-hidden="true"></span>
+<span class="sr-only">Next</span>
+</a>
 
-<img src = "http://phloatingman.com/sites/default/files/bitcoin-strength/bitcoin_strength.svg" class = 'bg'  alt = 'nope'>
+</div>
+
+<!-- Center the image -->
+<style scoped>
+.item img{
+    margin: 0 auto;
+}
+</style>
+
+
+<p align = "center" style = "position: absolutise; top: 1em; font-family: Times New Roman; font-size: 34px;">Bitcoin is power in numbers</p>

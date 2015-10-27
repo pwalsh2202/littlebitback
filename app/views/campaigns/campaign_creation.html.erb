@@ -1,14 +1,35 @@
-<h1> Campaign creation form </h1>
-<legend>Campaign</legend>
-<center>
-<%= form_for :campaign do |f| %>
-	Title: <%= f.text_field :title %><br>
-	Type: <%= f.text_field :type %><br>
-	<!--Bitcoin: <%= f.radio_button :preferred_currency, 'Bitcoin', :checked => true %><br>
-	Dogecoin: <%= f.radio_button :preferred_currency, 'Dogecoin'%><br> -->
-	Preferred Currency: <%= f.select :preferred_currency, ["Dogecoin", "Bitcoin"] %><br>
+<head>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+  <title>Submit a Campaign</title>
+<style>
+	.top-buffer{
+		margin-top: 20px;
 
-	QR Code: <%= f.file_field :uploaded_qr_code %>
-	<%= f.submit "Save the campaign punk" %>
-<% end %>
-</center>
+	}
+	body{
+		font-family: "open sans", sans-serif;
+	}
+</style>
+</head>
+<body>
+	<%= render 'campaign_form'%>
+</body>
+<!--
+<script type="text/javascript" src="grid.js"></script>
+<script type="text/javascript" src="version.js"></script>
+<script type="text/javascript" src="detector.js"></script>
+<script type="text/javascript" src="formatinf.js"></script>
+<script type="text/javascript" src="errorlevel.js"></script>
+<script type="text/javascript" src="bitmat.js"></script>
+<script type="text/javascript" src="datablock.js"></script>
+<script type="text/javascript" src="bmparser.js"></script>
+<script type="text/javascript" src="datamask.js"></script>
+<script type="text/javascript" src="rsdecoder.js"></script>
+<script type="text/javascript" src="gf256poly.js"></script>
+<script type="text/javascript" src="gf256.js"></script>
+<script type="text/javascript" src="decoder.js"></script>
+<script type="text/javascript" src="qrcode.js"></script>
+<script type="text/javascript" src="findpat.js"></script>
+<script type="text/javascript" src="alignpat.js"></script>
+<script type="text/javascript" src="databr.js"></script>
+-->s
