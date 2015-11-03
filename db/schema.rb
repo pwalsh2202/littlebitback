@@ -27,10 +27,12 @@ ActiveRecord::Schema.define(version: 20150902174412) do
     t.float    "rating"
     t.text     "tags"
     t.integer  "votes"
-    t.integer  "views"
+    t.integer  "views",              default: 0
     t.string   "qr_code"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.string   "cover_image"
+    t.string   "goal"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -6,7 +6,6 @@ class CampaignsController < ApplicationController
 
 	def show
 		if params[:title].nil?
-			@campaign = Campaign.new(:title => params[:campaign][:title], :ownership => current_user.id.to_i, :preferred_currency => params[:campaign][:preferred_currency], :views => "0")
 			
 			# saves the uploaded qr code
 			raw_upload = params[:campaign][:uploaded_qr_code]
@@ -15,17 +14,21 @@ class CampaignsController < ApplicationController
 				file.write(raw_upload.read)
 				#file.rename(raw_upload.read.to_s + raw_upload.original_filename.split('.')[-1])
 			end
-			@description = @campaign.description
-			require 'zxing'
-			@campaign.qr_code = ZXing.decode(upload_path.to_s)
+			
+			#require 'zxing'
+			qr_code = params[:campaign][:qr_code]#ZXing.decode(upload_path.to_s)
+			
+
+			@campaign = Campaign.new(:title => params[:campaign][:title], :ownership => current_user.id.to_i,
+			 						 :preferred_currency => params[:campaign][:preferred_currency],
+			 						 :description => params[:campaign][:description], :qr_code => qr_code, :location => upload_path)
 			@campaign.save
 			redirect_to "/c/#{params[:campaign][:title]}"
 		else
 			@campaign = Campaign.find_by_title(params[:title])
-			#@campaign.views +=1
-			@campaign.description = params[:description]
+			@campaign.views +=1
 			require 'open-uri'
-			@current_bitcoin_price = "a" #JSON.parse(open('https://api.coindesk.com/v1/bpi/currentprice.json').read)['bpi']['USD']['rate']
+			@current_bitcoin_price = "~$300"# JSON.parse(open('https://api.coindesk.com/v1/bpi/currentprice.json').read)['bpi']['USD']['rate']
 			  # potentially could make it unique to each session
 			@campaign.save
 		end

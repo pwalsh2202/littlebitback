@@ -16,6 +16,8 @@ class CreateCampaigns < ActiveRecord::Migration
       t.integer :votes
       t.integer :views, default: 0
       t.string :qr_code
+      t.string :cover_image
+      t.string :goal
 
       t.timestamps null: false
     end

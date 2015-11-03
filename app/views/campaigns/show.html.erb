@@ -9,12 +9,14 @@
 			<tr><td class = "auto">Current Bitcoin exchange rate:</td><td> <%= @current_bitcoin_price %></td></tr>
 			<tr><td>Accepts:</td><td> <%= @campaign.preferred_currency %></td></tr>
 			<tr><td>Page views:</td><td> <%= @campaign.views%></td></tr>
-			<tr><%=@campaign.qr_code%></tr>
+			<tr><td>Address:</td><td><%=@campaign.qr_code%></td></tr>
+			<tr><td><%= image_tag @campaign.location %></td></tr>
+
 	</table>
 </div>
 <div class = 'container containter-fluid' style = "box-shadow: 0 0 3px black;">
 	<div class = "col-lg-10">
-		<%= @description  %>
+		<%= @campaign.description  %>
 		
 	</div>
 </div>
