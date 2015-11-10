@@ -3,55 +3,68 @@
 		font-weight: bold;
 	}
 </style>
-
+<% console %>
 <h1> Campaign creation form </h1>
 <div class = "container" style = "width: 600px;box-shadow: 0 0 2px black; margin-bottom: 50px;">
+<fieldset>
 	<legend>Campaign</legend>
 
 <%= form_for :campaign, :html => { :class => "form-horizontal form-group"} do |f| %>
 	<div class = 'col-md-12 col-md-offset-2' style ='margin-top:5px; overflow: auto; display: inline-block;border:4px; align:left;'>
 					
-				Title<span style = "color:red;">*</span><br/> <%= f.text_field :title, :required => true, :placeholder => "Name of your project" %><br>
-				
-				<div class ="row top-buffer">
-					Category<br/> <%= f.select :type, ["Uncategorized", "People", "Events", "Non-profit Organizations", "Websites and Blogs", "Software", "Businesses", "Media and Content Creation", "Authors", "Singers", "Other"]%>
-				</div>
+		Title<span style = "color:red;">*</span><br/> <%= f.text_field :title, :required => true, :placeholder => "Name of your project" %><br>
+		
+		<div class ="row top-buffer">
+			Category<br/> <%= f.select :type, ["Uncategorized", "People", "Events", "Non-profit Organizations", "Websites and Blogs", "Software", "Businesses", "Media and Content Creation", "Authors", "Singers", "Other"]%>
+		</div>
 
-				<div class = "row top-buffer">
-					Preferred Currency<br/> <%= f.select :preferred_currency, ["Bitcoin", "Dogecoin"] %>
-				</div>
+		<div class = "row top-buffer">
+			Preferred Currency<br/> <%= f.select :preferred_currency, ["Bitcoin", "Dogecoin"] %>
+		</div>
 
-				<div class = "row top-buffer">
-					<span id ="pref-coin">Bitcoin</span> wallet address<span style = "color:red;">*</span><br/><%= f.text_field :qr_code, :required => true%>
-				</div>
-				<script>
-					document.getElementById("campaign_preferred_currency").onchange = function(){
-						document.getElementById("pref-coin").innerHTML = (this.options[this.selectedIndex].text);
-					}
-				</script>
-				<div class = 'row top-buffer'>
-					<%= f.file_field :uploaded_qr_code, :text => "Upload QR Code", :required => true %>
-				</div>
+		<div class = "row top-buffer">
+			<span id ="pref-coin">Bitcoin</span> wallet address<span style = "color:red;">*</span><br/><%= f.text_field :qr_code, :required => true%>
+		</div>
+		<div class = 'row top-buffer'>
+			<%= f.file_field :uploaded_qr_code, :text => "Upload QR Code", :required => true %>
+		</div>
 
-				<div class = 'row top-buffer'>
-					Goal<br/><%= f.text_field :goal, :only_integer => true%> <span id= 'pref-coin'>B</span>
-				</div>
-				<script>
-					document.getElementById("campaign_preferred_currency").onchange = function(){
-						document.getElementById("pref-coin").innerHTML = (this.options[this.selectedIndex[0]].text);
-					}
-				</script>
+		<div class = 'row top-buffer'>
+			Goal<br/><%= f.text_field :goal, :enabled => true%> or <%= f.check_box :open_donations, :onclick => "changeElement()" %> Open Donations
+		</div>
+		<script>
+			//select B and D and L or whatever from unicode
+			document.getElementById("campaign_preferred_currency").onchange = function(){
+				document.getElementById("pref-coin-initial").innerHTML = this.options[this.selectedIndex].text[0];	
+				document.getElementById("pref-coin").innerHTML = this.options[this.selectedIndex].text;
+			}
+			var elementCheckMark = document.getElementById("campaign_open_donations")
+			var outputField = document.getElementById("campaign_goal")
+			function changeElement() {
+				if (elementCheckMark.checked === true){
+					
+					outputField.disabled = true
+					outputField.value = "Open Donations"
+				}	
+				else{
+					outputField.disabled = false
+					outputField.value = ""
+				}
+			}
 
-				<div class = 'row top-buffer'>
-					Description<span style = "color:red;">*</span><br/> <%= f.text_area :description, :required => true, :rows=>'5', :cols=> "40", :style => "margin-bottom: 10px; resize: none;" %><br>
-				</div>
-				<!-- javascript here to create a default description using title, category, preferred currency-->
+		</script>
 
-				<div class = 'row top-buffer'>
-					Cover Image<%= f.file_field :cover_image, :text => "Upload Cover Image", :class => "btn btn-sm btn-alert"%>
-				</div>
+		<div class = 'row top-buffer'>
+			Description<span style = "color:red;">*</span><br/> <%= f.text_area :description, :required => true, :rows=>'5', :cols=> "40", :style => "margin-bottom: 10px; resize: none;" %><br>
+		</div>
+		<!-- javascript here to generate a default suggestion description using title, category, preferred currency-->
+
+		<div class = 'row top-buffer'>
+			Cover Image<%= f.file_field :cover_image, :text => "Upload Cover Image", :class => "btn btn-sm btn-alert"%>
+		</div>
 
 	<%= f.submit "Save Campaign", :class => "btn btn-lg btn-primary top-buffer", :style => 'margin-bottom: 20px;' %>
 	</div>
 <% end %>
+</fieldset>
 </div>
