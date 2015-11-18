@@ -3,7 +3,6 @@ class CreateCampaigns < ActiveRecord::Migration
     create_table :campaigns do |t|
       t.string :title
       t.string :objective
-      t.string :type
       t.text :description
       t.string :ownership
       t.string :category

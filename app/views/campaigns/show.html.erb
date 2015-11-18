@@ -14,8 +14,9 @@
 
 	</table>
 </div>
-<div class = 'container containter-fluid' style = "box-shadow: 0 0 3px black;">
+<div class = 'container containter-fluid' style = "width: 600px; overflow: auto;box-shadow: 0 0 3px black;">
 	<div class = "col-lg-10">
+		<%= image_tag "cover_images/#{Campaign.find_by_title(params[:title]).id}.png" %>
 		<%= @campaign.description  %>
 		
 	</div>

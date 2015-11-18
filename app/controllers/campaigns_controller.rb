@@ -1,40 +1,53 @@
 class CampaignsController < ApplicationController
 
+	
 
 	def campaign_creation
+		@campaign = Campaign.new
+	end
+
+	def create
+
+		@campaign = Campaign.new(campaign_params)
+		
+
+		# dealing with cover image
+		@campaign.save
+
+
+
+
+
+		upload_path = Rails.root.join("app","assets","images","cover_images")
+		image_name =  params[:campaign][:cover_image].original_filename
+		File.open(upload_path + image_name, 'wb') do |f|
+			f.write(params[:campaign][:cover_image].read)
+		end
+		#this is stupid notation, should be changed, but for some reason adding the strings kept adding an unnecessary "/" and broke the thing
+		File.rename(upload_path.join(image_name), upload_path + "#{Campaign.find_by_title(params[:campaign][:title]).id.to_s}#{File.extname(image_name)}")
+
+
+
+
+		redirect_to "/c/#{@campaign.title}"
 	end
 
 	def show
-		if params[:title].nil?
-			
-			# saves the uploaded qr code
-			raw_upload = params[:campaign][:uploaded_qr_code]
-			upload_path = Rails.root.join('public', 'uploads', raw_upload.original_filename)
-			File.open(upload_path, 'wb') do |file|
-				file.write(raw_upload.read)
-				#file.rename(raw_upload.read.to_s + raw_upload.original_filename.split('.')[-1])
-			end
-			
-			#require 'zxing'
-			qr_code = params[:campaign][:qr_code]#ZXing.decode(upload_path.to_s)
-			
-
-			@campaign = Campaign.new(:title => params[:campaign][:title], :ownership => current_user.id.to_i,
-			 						 :preferred_currency => params[:campaign][:preferred_currency],
-			 						 :description => params[:campaign][:description], :qr_code => qr_code, :location => upload_path)
-			@campaign.save
-			redirect_to "/c/#{params[:campaign][:title]}"
-		else
-			@campaign = Campaign.find_by_title(params[:title])
-			@campaign.views +=1
-			require 'open-uri'
-			@current_bitcoin_price = "~$300"# JSON.parse(open('https://api.coindesk.com/v1/bpi/currentprice.json').read)['bpi']['USD']['rate']
+		@campaign = Campaign.find_by_title(params[:title])
+		@campaign.views += 1
+		require 'open-uri'
+		@current_bitcoin_price =JSON.parse(open('https://api.coindesk.com/v1/bpi/currentprice.json').read)['bpi']['USD']['rate'].to_f.round(2)
 			  # potentially could make it unique to each session
-			@campaign.save
-		end
+		@campaign.save
 	end
 
 	def index
 		@campaigns = Campaign.all
 	end
+	private
+		def campaign_params
+			#missing: uploaded_qr_code, tags	
+			params.require(:campaign).permit(:title,:type,:preferred_currency,:qr_code, :goal, :description)
+    	end
+
 end

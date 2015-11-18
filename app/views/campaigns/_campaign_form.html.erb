@@ -3,19 +3,18 @@
 		font-weight: bold;
 	}
 </style>
-<% console %>
 <h1> Campaign creation form </h1>
 <div class = "container" style = "width: 600px;box-shadow: 0 0 2px black; margin-bottom: 50px;">
 <fieldset>
 	<legend>Campaign</legend>
 
-<%= form_for :campaign, :html => { :class => "form-horizontal form-group"} do |f| %>
+<%= form_for @campaign, :html => { :class => "form-horizontal form-group"} do |f| %>
 	<div class = 'col-md-12 col-md-offset-2' style ='margin-top:5px; overflow: auto; display: inline-block;border:4px; align:left;'>
 					
 		Title<span style = "color:red;">*</span><br/> <%= f.text_field :title, :required => true, :placeholder => "Name of your project" %><br>
 		
 		<div class ="row top-buffer">
-			Category<br/> <%= f.select :type, ["Uncategorized", "People", "Events", "Non-profit Organizations", "Websites and Blogs", "Software", "Businesses", "Media and Content Creation", "Authors", "Singers", "Other"]%>
+			Category<br/> <%= f.select :category, ["Uncategorized", "People", "Events", "Non-profit Organizations", "Websites and Blogs", "Software", "Businesses", "Media and Content Creation", "Authors", "Singers", "Other"]%>
 		</div>
 
 		<div class = "row top-buffer">
@@ -30,7 +29,7 @@
 		</div>
 
 		<div class = 'row top-buffer'>
-			Goal<br/><%= f.text_field :goal, :enabled => true%> or <%= f.check_box :open_donations, :onclick => "changeElement()" %> Open Donations
+			Goal<br/><%= f.text_field :goal, :enabled => true%> or <%= f.check_box :goal, :onclick => "changeElement()" %> Open Donations
 		</div>
 		<script>
 			//select B and D and L or whatever from unicode
