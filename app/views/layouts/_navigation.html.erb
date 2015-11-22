@@ -1,16 +1,6 @@
 <%# navigation styled for Bootstrap 3.0 %>
-<style>
-  li {
-    transition: background-color 0.5s ease;
-  }
-  li:hover{
-    background-color: #7f8c8d;
-    }
-/*"*/
 
-</style>
-
-<nav class="navbar navbar-inverse navbar-embossed" style= "background-color: #ecf0f1; border: 0px solid white; border-bottom:2px solid black" role= "navigation">
+<nav class="navbar navbar-inverse navbar-embossed" style= "background-color: #ecf0f1; border: 0px solid white; border-bottom:2px solid black; margin: 0px;" role= "navigation">
   <div class="container container-fluid">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -23,7 +13,7 @@
       <ul class="nav navbar-nav navbar-left links">
         <%= render 'layouts/navigation_links' %>
         <!-- want no transition here -->
-        <li><%= button_to "Post your Project", create_campaign_path, :class => "btn btn-md btn-block btn-success", :style => "margin-top: 8px;"%></li>
+        <li><%= button_to "Post your Project", create_campaign_path, :method => :get, :class => "btn btn-md btn-block btn-success", :style => "margin-top: 8px;"%></li>
 
       </ul>
     </div>

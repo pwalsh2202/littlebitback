@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 20150902174412) do
   create_table "campaigns", force: :cascade do |t|
     t.string   "title"
     t.string   "objective"
-    t.string   "type"
     t.text     "description"
     t.string   "ownership"
     t.string   "category"

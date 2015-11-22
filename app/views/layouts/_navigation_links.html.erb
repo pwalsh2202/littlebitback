@@ -1,17 +1,27 @@
 <%# add navigation links to this file %>
-<li><%= link_to image_tag("logo.gif"), root_url%></li>
-<li><%= link_to 'Home', root_url%></li>
+<style>
+	li#elem{
+    transition: background-color 0.5s ease;
+  	}
 
+  	li#elem:hover{
+    background-color: #7f8c8d;
+    }
+</style>
+
+
+<li><%= link_to image_tag("logo.gif"), root_url%></li>
+<li id = 'elem'><%= link_to 'Home', root_url%></li>
 <% if user_signed_in? %>
-  <li><%= link_to 'Sign out', signout_path %></li>
+  <li id = 'elem'><%= link_to 'Sign out', signout_path %></li>
 <% else %>
-  <li><%= link_to 'Sign in', login_path %></li>
+  <li id = 'elem'><%= link_to 'Sign in', login_path %></li>
 <% end %>
 
-  <li><%= link_to 'Campaigns', index_campaign_path %></li>
+  <li id = 'elem'><%= link_to 'Campaigns', index_campaign_path %></li>
 
 
 <!-- Static pages, accounting for hidden directories -->
 <% for static in Dir.entries(Rails.root.join("app", "views","pages")).map { |file_name| file_name.split(".")[0] }.compact %>
-	<li><%= link_to static.capitalize, page_path(static.downcase) %></li>
+	<li id = 'elem'><%= link_to static.capitalize, page_path(static.downcase) %></li>
 <% end %>

@@ -16,4 +16,13 @@ class User < ActiveRecord::Base
   	facebook.get_object("me?fields=picture")
   end
 
+  def add_projects(campaign)
+    '''runs after campaign is created'''
+    campaign.ownership = self.id
+    self.projects_owned.push(campaign.id)  
+  end
+
+  def get_projects
+    return self.projects.split(',')
+  end
 end

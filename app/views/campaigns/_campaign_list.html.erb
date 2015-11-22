@@ -1,8 +1,0 @@
-<% @campaigns.each do |c| %>
-	<%begin%>
-		<ul><%= link_to c.title,  show_campaign_path(c.title)%> <%= c.qr_code %></ul>
-		<%= image_tag "cover_images/#{c.id}.png"%>
-	<% rescue %>
-		<% nil %>
-	<% end %>
-<% end %>
