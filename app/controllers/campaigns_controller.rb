@@ -26,7 +26,7 @@ class CampaignsController < ApplicationController
 	def show
 		@campaign = Campaign.find_by_title(params[:title])
 		@campaign.views += 1
-		@current_bitcoin_price = JSON.parse(open('https://api.coindesk.com/v1/bpi/currentprice.json').read)['bpi']['USD']['rate'].to_f.round(2)
+		#@current_bitcoin_price = JSON.parse(open('https://api.coindesk.com/v1/bpi/currentprice.json').read)['bpi']['USD']['rate'].to_f.round(2)
 		# potentially could make it unique to each session
 		@campaign.save
 	end
